@@ -45,7 +45,7 @@ stage ('Sorce Code Analysis') {
   stage ('Deplpoy to Tomcat') {
       steps {
       sshagent (['tomcat']) {
-        sh 'scp -o ConnectTimeout=60 -o StrictHostKeyChecking=no target/onlinebookstore-0.0.1-SNAPSHOT.war ubuntu@65.1.94.119:/prod/apache-tomcat-8.5.98/webapps/OnlineBookStore.war
+        sh 'scp -o ConnectTimeout=60 -o StrictHostKeyChecking=no target/onlinebookstore-0.0.1-SNAPSHOT.war ubuntu@3.108.190.222:/prod/apache-tomcat-8.5.98/webapps/OnlineBookStore.war
 '
       }
     }
