@@ -15,14 +15,14 @@ pipeline {
 stage ('Check-git-Secrets') {
   steps {
       sh 'rm trufflehog || true'
-      sh 'docker run gesellix/trufflehog --json https://github.com/LaxmiBH/webapp.git > trufflehog'
+      sh 'docker run gesellix/trufflehog --json https://github.com/Avadhut8003/OnlineBookStore.git > trufflehog'
       sh 'cat trufflehog'
   }
 }
 stage ('Sorce Code Analysis') {
   steps {
       sh 'rm owasp* || true'
-      sh 'wget https://raw.githubusercontent.com/LaxmiBH/webapp/master/owasp-dependency-check.sh'
+      sh 'wget https://raw.githubusercontent.com/Avadhut8003/OnlineBookStore/master/owasp-dependency-check.sh'
       sh 'chmod +x owasp-dependency-check.sh'
       sh 'bash owasp-dependency-check.sh'
       sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
@@ -37,7 +37,7 @@ stage ('Sorce Code Analysis') {
   stage ('Deplpoy to Tomcat') {
       steps {
       sshagent (['tomcat']) {
-        sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@65.1.94.119:/prod/apache-tomcat-8.5.98/webapps/webapp.war'
+        sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@65.1.94.119:/prod/apache-tomcat-8.5.98/webapps/OnlineBookStore.war'
       }
     }
    }
